@@ -35,12 +35,12 @@ jobs:
         run: gradle :app:assembleDebug --stacktrace
 
       - name: Rename APK
-        run: cp app/build/outputs/apk/debug/app-debug.apk K_Route_v1.0_TEST.apk
+        run: cp app/build/outputs/apk/debug/app-debug.apk K_Route_v2.0_TEST.apk
 
       - name: Upload APK
         uses: actions/upload-artifact@v4
         with:
-          name: K_Route_v1.0_TEST
-          path: K_Route_v1.0_TEST.apk
+          name: K_Route_v2.0_TEST
+          path: K_Route_v2.0_TEST.apk
           if-no-files-found: error
           retention-days: 30
