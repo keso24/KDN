@@ -156,7 +156,10 @@ public class TripTrackingService extends Service implements LocationListener {
             if (locationManager != null) locationManager.removeUpdates(this);
         } catch (Exception ignored) {
         }
-        if (tripId <= 0) tripId = db.getActiveTripId();
+        if (tripId <= 0) {
+            tripId = db.getActiveTripId();
+            if (tripId > 0) restoreState();
+        }
         if (tripId > 0) db.finishTrip(tripId, totalDistance, maxSpeedKmh, stoppedMs, pointCount);
         stopForeground(STOP_FOREGROUND_REMOVE);
         stopSelf();
