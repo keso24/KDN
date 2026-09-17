@@ -154,9 +154,19 @@ public class MainActivity extends Activity {
                 double lat = d.getDouble("lat");
                 double lon = d.getDouble("lon");
                 String url = "https://waze.com/ul?ll=" + lat + "%2C" + lon + "&navigate=yes&utm_source=kroute_v2";
-                Intent i = new Intent(Intent.ACTION_VIEW, Uri.parse(url));
+                Uri uri = Uri.parse(url);
+                Intent i = new Intent(Intent.ACTION_VIEW, uri);
                 i.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                startActivity(i);
+                if (getPackageManager().getLaunchIntentForPackage("com.waze") != null) {
+                    i.setPackage("com.waze");
+                }
+                try {
+                    startActivity(i);
+                } catch (Exception first) {
+                    Intent fallback = new Intent(Intent.ACTION_VIEW, uri);
+                    fallback.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                    startActivity(fallback);
+                }
             } catch (Exception ignored) {
             }
         }
