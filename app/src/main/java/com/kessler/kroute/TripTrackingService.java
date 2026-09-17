@@ -13,8 +13,6 @@ import android.os.Build;
 import android.os.Bundle;
 import android.os.IBinder;
 
-import androidx.annotation.Nullable;
-
 import org.json.JSONObject;
 
 public class TripTrackingService extends Service implements LocationListener {
@@ -177,7 +175,6 @@ public class TripTrackingService extends Service implements LocationListener {
     @Override public void onProviderDisabled(String provider) {}
     @Override public void onStatusChanged(String provider, int status, Bundle extras) {}
 
-    @Nullable
     @Override
     public IBinder onBind(Intent intent) {
         return null;
