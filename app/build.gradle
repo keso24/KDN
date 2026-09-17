@@ -6,15 +6,6 @@ android {
     namespace 'com.kessler.kroute'
     compileSdk 35
 
-    signingConfigs {
-        debug {
-            storeFile rootProject.file('ci/kroute-test.jks')
-            storePassword 'kroute-test'
-            keyAlias 'kroute-test'
-            keyPassword 'kroute-test'
-        }
-    }
-
     defaultConfig {
         applicationId 'com.kessler.kroute'
         minSdk 26
@@ -24,9 +15,6 @@ android {
     }
 
     buildTypes {
-        debug {
-            signingConfig signingConfigs.debug
-        }
         release {
             minifyEnabled false
         }
