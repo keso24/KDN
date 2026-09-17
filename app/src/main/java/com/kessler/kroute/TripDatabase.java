@@ -178,14 +178,17 @@ public class TripDatabase extends SQLiteOpenHelper {
         try (Cursor c = db.rawQuery("SELECT ts,lat,lon,speed,accuracy,bearing FROM trip_points WHERE trip_id=? ORDER BY ts",
                 new String[]{String.valueOf(tripId)})) {
             while (c.moveToNext()) {
-                JSONArray p = new JSONArray();
-                p.put(c.getLong(0));
-                p.put(c.getDouble(1));
-                p.put(c.getDouble(2));
-                p.put(c.getDouble(3));
-                p.put(c.getDouble(4));
-                p.put(c.getDouble(5));
-                arr.put(p);
+                try {
+                    JSONArray p = new JSONArray();
+                    p.put(c.getLong(0));
+                    p.put(c.getDouble(1));
+                    p.put(c.getDouble(2));
+                    p.put(c.getDouble(3));
+                    p.put(c.getDouble(4));
+                    p.put(c.getDouble(5));
+                    arr.put(p);
+                } catch (Exception ignored) {
+                }
             }
         }
         return arr.toString();
